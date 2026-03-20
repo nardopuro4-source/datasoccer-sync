@@ -13,6 +13,9 @@ jobs:
       - name: Sync fixtures
         run: |
           echo "=== Sync $(date) ==="
-          curl -s -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
-            "https://datasoccer.byethost9.com/sync.php?key=a1b2c3.." \
-            | python3 -m json.tool || echo "Response was not JSON"
+          RESPONSE=$(curl -s -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
+            "https://datasoccer.byethost9.com/sync.php?key=a1b2c3..")
+          echo "--- RESPONSE ---"
+          echo "$RESPONSE"
+          echo "--- END ---"
+          echo "$RESPONSE" | python3 -m json.tool || echo "Not JSON"
